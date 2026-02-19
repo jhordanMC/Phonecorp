@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhoneCorp Solutions | Smartphones de Última Generación</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #000000;
+            --bg-2: #0a0a0a;
+            --bg-3: #111111;
+            --surface: #161616;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.2);
+            --text: #ffffff;
+            --text-muted: #888888;
+            --text-dim: #555555;
+            --accent: #ffffff;
+            --accent-cta: #ffffff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* No animated background blobs — pure black like Starlink */
+        .bg-animation { display: none; }
+
+        /* ── HEADER ── */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .btn {
+            padding: 0.65rem 1.8rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: var(--text);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #e0e0e0;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            background-image: url('https://starlink.com/public-files/residential_c_hero_d.webp');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        /* Dark overlay so text stays readable */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to right,
+                rgba(0,0,0,0.72) 0%,
+                rgba(0,0,0,0.45) 55%,
+                rgba(0,0,0,0.15) 100%
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            animation: fadeInLeft 0.7s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+        }
+
+        .hero-text h1 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            color: var(--text);
+        }
+
+        .gradient-text {
+            color: var(--text);
+            /* No gradient — Starlink uses flat white */
+        }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border-hover);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 0.7s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+        }
+
+        .phone-showcase {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-card {
+            position: absolute;
+            width: 280px;
+            height: 560px;
+            background: var(--surface);
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            animation: levitate 5s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes levitate {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-18px) rotate(-6deg); }
+        }
+
+        .phone-card::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 22px;
+            background: var(--bg);
+            border-radius: 0 0 16px 16px;
+            z-index: 2;
+        }
+
+        .phone-screen {
+            position: absolute;
+            top: 48px;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1rem;
+            text-align: center;
+            padding: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── SECTION TITLES ── */
+        .features, .cta {
+            padding: 8rem 5%;
+        }
+
+        .features { border-bottom: 1px solid var(--border); }
+
+        .products {
+            padding: 8rem 5%;
+            background-image: url('https://starlink.com/public-files/residential_b_reliability_d.webp');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            border-bottom: 1px solid var(--border);
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        /* Overlay para que las cards sean legibles sobre la foto */
+        .products::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .products .section-title,
+        .products .products-slider {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+        }
+
+        .section-title h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* ── FEATURES ── */
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .feature-card {
+            background: var(--bg);
+            padding: 3rem 2.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: var(--bg-3);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+            font-size: 1.6rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.75;
+            font-size: 0.95rem;
+        }
+
+        /* ── PRODUCTS ── */
+        .products-slider {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .product-card {
+            background: var(--bg-2);
+            padding: 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .product-card:hover {
+            background: var(--bg-3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 260px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--text);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .product-info h3 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .product-specs {
+            display: flex;
+            gap: 0.6rem;
+            margin: 0.8rem 0;
+            flex-wrap: wrap;
+        }
+
+        .spec-tag {
+            background: var(--surface);
+            color: var(--text-muted);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            border: 1px solid var(--border);
+        }
+
+        .product-price {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 1rem 0;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+
+        .btn-cart {
+            flex: 1;
+            background: var(--text);
+            color: #000;
+            padding: 0.9rem;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-cart:hover {
+            background: #e0e0e0;
+        }
+
+        /* ── NOSOTROS ── */
+        .nosotros {
+            padding: 8rem 5%;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+        .nosotros-inner { max-width: 1400px; margin: 0 auto; }
+        .nos-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .nos-mv {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-bottom: 4rem;
+        }
+        .nos-card { background: var(--bg); padding: 3rem; transition: background 0.3s; }
+        .nos-card:hover { background: var(--bg-3); }
+        .nos-icon {
+            width: 48px; height: 48px;
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; color: var(--text-muted);
+        }
+        .nos-card h3 { font-family: 'Archivo', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+        .nos-card p { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; }
+        .nos-datos { margin-bottom: 4rem; }
+        .nos-datos-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: var(--border); border: 1px solid var(--border);
+        }
+        .nos-dato { background: var(--bg); padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 0.4rem; transition: background 0.3s; }
+        .nos-dato:hover { background: var(--bg-3); }
+        .nos-dato-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+        .nos-dato-val { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+        .nos-objetivos { margin-bottom: 4rem; }
+        .nos-obj-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1px; background: var(--border); border: 1px solid var(--border);
+        }
+        .nos-obj-item { background: var(--bg); padding: 2.5rem 2rem; transition: background 0.3s; }
+        .nos-obj-item:hover { background: var(--bg-3); }
+        .nos-obj-num { font-family: 'Archivo', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--text-dim); line-height: 1; margin-bottom: 1rem; letter-spacing: -0.04em; }
+        .nos-obj-item p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+        .nos-metas { margin-bottom: 4rem; }
+        .nos-metas-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1px; background: var(--border); border: 1px solid var(--border);
+        }
+        .nos-meta-item { background: var(--bg); padding: 2.5rem 2rem; transition: background 0.3s; }
+        .nos-meta-item:hover { background: var(--bg-3); }
+        .nos-meta-num { font-family: 'Archivo', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--text); letter-spacing: -0.03em; margin-bottom: 0.8rem; }
+        .nos-meta-item p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.65; }
+        .nos-org-grid {
+            display: grid; grid-template-columns: repeat(5, 1fr);
+            gap: 1px; background: var(--border); border: 1px solid var(--border);
+        }
+        .nos-org-card { background: var(--bg); padding: 2rem 1.5rem; transition: background 0.3s; }
+        .nos-org-card:hover { background: var(--bg-3); }
+        .nos-org-icon { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; color: var(--text-muted); }
+        .nos-org-card h4 { font-family: 'Archivo', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .nos-org-card p { color: var(--text-dim); font-size: 0.82rem; line-height: 1.65; }
+        @media (max-width: 1024px) {
+            .nos-obj-grid, .nos-metas-grid { grid-template-columns: repeat(2, 1fr); }
+            .nos-datos-grid { grid-template-columns: repeat(2, 1fr); }
+            .nos-org-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nos-mv, .nos-obj-grid, .nos-metas-grid, .nos-datos-grid, .nos-org-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── CTA ── */
+        .cta {
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cta-content {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            color: var(--text);
+        }
+
+        .cta-content p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--bg);
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .footer-section ul { list-style: none; }
+
+        .footer-section ul li { margin-bottom: 0.8rem; }
+
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: var(--text); }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-text h1 { font-size: 3.2rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-text p { max-width: 100%; }
+            .phone-showcase { height: 460px; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-text h1 { font-size: 2.4rem; }
+            .section-title h2 { font-size: 2.2rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .products-slider { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .cta-content h2 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <nav>
+            <div class="logo">PhoneCorp</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><button class="btn btn-primary">Mi Cuenta</button></li>
+                <li>
+                    <button id="cart-btn" onclick="openCart()" style="background:none;border:none;cursor:pointer;position:relative;padding:8px;display:flex;align-items:center;justify-content:center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        <span id="cart-badge" style="display:none;position:absolute;top:0;right:0;background:#fff;color:#000;font-size:0.65rem;font-weight:800;width:18px;height:18px;border-radius:50%;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;">0</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Tecnología <span class="gradient-text">Móvil</span><br>
+                    de Última Generación
+                </h1>
+                <p>Descubre los smartphones más avanzados del mercado. Compra online con seguridad, envío rápido a todo el Perú y atención personalizada 24/7.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Ver Catálogo</button>
+                    <button class="btn btn-secondary">Conocer Más</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-showcase">
+                    <div class="phone-card">
+                        <div class="phone-screen">
+                            <div class="screen-content">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;opacity:0.4"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+                                <span>Tu próximo<br>smartphone</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-title">
+            <h2>¿Por qué elegir <span class="gradient-text">PhoneCorp</span>?</h2>
+            <p>Líder en comercialización digital de smartphones en Perú</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+                <h3>Entrega Express</h3>
+                <p>Procesamiento en menos de 24 horas y envíos a las principales ciudades del país.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                <h3>Pago Seguro</h3>
+                <p>Pasarela de pagos certificada con múltiples métodos: tarjetas, efectivo y crédito.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
+                <h3>Stock en Tiempo Real</h3>
+                <p>Inventario sincronizado. Solo compras lo que tenemos disponible.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M7 9H4"/><path d="M7 12H4"/><path d="M7 15H4"/><path d="M17 9h3"/><path d="M17 12h3"/><path d="M17 15h3"/><path d="M9 7V4"/><path d="M12 7V4"/><path d="M15 7V4"/><path d="M9 17v3"/><path d="M12 17v3"/><path d="M15 17v3"/></svg></div>
+                <h3>Última Tecnología</h3>
+                <p>Catálogo actualizado con los modelos más recientes de todas las marcas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <h3>Seguimiento 24/7</h3>
+                <p>Rastrea tu pedido en tiempo real desde la compra hasta tu puerta.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                <h3>Soporte Premium</h3>
+                <p>Atención personalizada para consultas, garantías y cambios.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="nosotros" id="nosotros">
+        <div class="nosotros-inner">
+
+            <!-- Encabezado -->
+            <div class="section-title">
+                <h2>Sobre <span class="gradient-text">PhoneCorp</span></h2>
+                <p>Conoce quiénes somos, nuestra misión y hacia dónde vamos</p>
+            </div>
+
+            <!-- Bloque Misión / Visión -->
+            <div class="nos-mv">
+                <div class="nos-card">
+                    <div class="nos-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    </div>
+                    <h3>Misión</h3>
+                    <p>Proveer a nuestros clientes acceso inmediato a una amplia gama de teléfonos inteligentes de última generación a través de un canal digital confiable, garantizando calidad y rapidez en la entrega.</p>
+                </div>
+                <div class="nos-card">
+                    <div class="nos-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <h3>Visión</h3>
+                    <p>Ser la plataforma líder a nivel nacional en la comercialización digital de smartphones, reconocida por ofrecer la tecnología móvil más reciente con una experiencia de compra segura y eficiente.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="products" id="productos">
+        <div class="section-title">
+            <h2>Smartphones <span class="gradient-text">Destacados</span></h2>
+            <p>Los modelos más populares y tecnología de punta</p>
+        </div>
+        <div class="products-slider">
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">Nuevo</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
+                </div>
+                <div class="product-info">
+                    <h3>iPhone 15 Pro Max</h3>
+                    <div class="product-specs">
+                        <span class="spec-tag">256GB</span>
+                        <span class="spec-tag">6.7"</span>
+                        <span class="spec-tag">5G</span>
+                    </div>
+                    <div class="product-price">S/ 5,499</div>
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="addToCart('iPhone 15 Pro Max', 5499, 'iphone15promax')">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">Popular</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
+                </div>
+                <div class="product-info">
+                    <h3>Samsung Galaxy S24 Ultra</h3>
+                    <div class="product-specs">
+                        <span class="spec-tag">512GB</span>
+                        <span class="spec-tag">6.8"</span>
+                        <span class="spec-tag">5G</span>
+                    </div>
+                    <div class="product-price">S/ 4,999</div>
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="addToCart('Samsung Galaxy S24 Ultra', 4999, 'samsungs24ultra')">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
+                </div>
+                <div class="product-info">
+                    <h3>Google Pixel 8 Pro</h3>
+                    <div class="product-specs">
+                        <span class="spec-tag">256GB</span>
+                        <span class="spec-tag">6.7"</span>
+                        <span class="spec-tag">5G</span>
+                    </div>
+                    <div class="product-price">S/ 3,799</div>
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="addToCart('Google Pixel 8 Pro', 3799, 'pixel8pro')">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">Oferta</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
+                </div>
+                <div class="product-info">
+                    <h3>Xiaomi 14 Ultra</h3>
+                    <div class="product-specs">
+                        <span class="spec-tag">512GB</span>
+                        <span class="spec-tag">6.73"</span>
+                        <span class="spec-tag">5G</span>
+                    </div>
+                    <div class="product-price">S/ 3,499</div>
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="addToCart('Xiaomi 14 Ultra', 3499, 'xiaomi14ultra')">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>¿Listo para tu <span class="gradient-text">nuevo smartphone</span>?</h2>
+            <p>Compra ahora y recibe tu equipo en tiempo récord con todas las garantías y facilidades de pago.</p>
+            <button class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 3rem;">Comprar Ahora</button>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>PhoneCorp</h3>
+                <p>Líder en comercialización digital de smartphones de última generación en Perú.</p>
+                <p><span style="display:inline-flex;vertical-align:middle;margin-right:6px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span> Av. Innovación Tecnológica N.º 123<br>San Isidro, Lima – Perú</p>
+                <p><span style="display:inline-flex;vertical-align:middle;margin-right:6px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> (01) 999-1919</p>
+                <p><span style="display:inline-flex;vertical-align:middle;margin-right:6px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4131292e2f24222e33310131292e2f24222e33312c20282d6f3124">[email&#160;protected]</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#">iPhone</a></li>
+                    <li><a href="#">Samsung</a></li>
+                    <li><a href="#">Xiaomi</a></li>
+                    <li><a href="#">Google Pixel</a></li>
+                    <li><a href="#">OnePlus</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Soporte</h4>
+                <ul>
+                    <li><a href="#">Seguimiento</a></li>
+                    <li><a href="#">Garantías</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Misión</a></li>
+                    <li><a href="#">Visión</a></li>
+                    <li><a href="#">Términos</a></li>
+                    <li><a href="#">Privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PhoneCorp Solutions S.A.C. | RUC: 20999999999 | Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+
+    <!-- ── CART DRAWER ── -->
+    <div id="cart-overlay" onclick="closeCart()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9000;backdrop-filter:blur(4px);"></div>
+    <div id="cart-drawer">
+        <div id="cart-drawer-header">
+            <span id="cart-drawer-title" style="display:flex;align-items:center;gap:8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Tu Carrito
+            </span>
+            <button onclick="closeCart()" id="cart-close-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div id="cart-items-list"></div>
+        <div id="cart-footer">
+            <div id="cart-subtotal-row">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">S/ 0</span>
+            </div>
+            <button id="btn-checkout" onclick="goCheckout()" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                Proceder al Pago
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ── CHECKOUT MODAL ── -->
+    <div id="checkout-overlay" onclick="closeCheckout()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9500;backdrop-filter:blur(6px);overflow-y:auto;"></div>
+    <div id="checkout-modal">
+        <div id="checkout-header">
+            <button onclick="closeCheckout()" id="checkout-back" style="display:flex;align-items:center;gap:6px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                Volver
+            </button>
+            <span id="checkout-title">Finalizar Compra</span>
+            <span></span>
+        </div>
+        <!-- Steps indicator -->
+        <div id="steps-bar">
+            <div class="step-item active" id="step-ind-1"><span class="step-num">1</span><span class="step-label">Datos</span></div>
+            <div class="step-line"></div>
+            <div class="step-item" id="step-ind-2"><span class="step-num">2</span><span class="step-label">Dirección</span></div>
+            <div class="step-line"></div>
+            <div class="step-item" id="step-ind-3"><span class="step-num">3</span><span class="step-label">Pago</span></div>
+            <div class="step-line"></div>
+            <div class="step-item" id="step-ind-4"><span class="step-num">4</span><span class="step-label">Confirmar</span></div>
+        </div>
+
+        <!-- STEP 1: Datos personales -->
+        <div id="step-1" class="checkout-step">
+            <h3 class="step-title">Datos del Comprador</h3>
+            <div class="form-row">
+                <div class="form-group"><label>Nombres *</label><input type="text" id="inp-nombres" placeholder="Juan Carlos"></div>
+                <div class="form-group"><label>Apellidos *</label><input type="text" id="inp-apellidos" placeholder="García López"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>DNI / CE *</label><input type="text" id="inp-dni" placeholder="12345678" maxlength="12"></div>
+                <div class="form-group"><label>Teléfono *</label><input type="tel" id="inp-telefono" placeholder="987 654 321"></div>
+            </div>
+            <div class="form-group full-width"><label>Correo Electrónico *</label><input type="email" id="inp-email" placeholder="juan@email.com"></div>
+            <button class="btn-next" onclick="nextStep(1)" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                Continuar
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+        </div>
+
+        <!-- STEP 2: Dirección -->
+        <div id="step-2" class="checkout-step" style="display:none;">
+            <h3 class="step-title">Dirección de Entrega</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Departamento *</label>
+                    <select id="inp-dpto">
+                        <option value="">Selecciona...</option>
+                        <option>Lima</option><option>Arequipa</option><option>Cusco</option>
+                        <option>La Libertad</option><option>Piura</option><option>Lambayeque</option>
+                        <option>Junín</option><option>Ica</option><option>Áncash</option><option>Otro</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Provincia *</label><input type="text" id="inp-provincia" placeholder="Lima"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Distrito *</label><input type="text" id="inp-distrito" placeholder="Miraflores"></div>
+                <div class="form-group"><label>Código Postal</label><input type="text" id="inp-cp" placeholder="15074"></div>
+            </div>
+            <div class="form-group full-width"><label>Dirección (Av., calle, número) *</label><input type="text" id="inp-direccion" placeholder="Av. Larco 123"></div>
+            <div class="form-group full-width"><label>Referencia</label><input type="text" id="inp-referencia" placeholder="Frente al parque, piso 3..."></div>
+            <div class="delivery-info-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                Lima Metropolitana: 1–2 días · Provincias: 3–5 días · Envío gratis +S/500
+            </div>
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                <button class="btn-back" onclick="prevStep(2)" style="display:flex;align-items:center;gap:6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                    Atrás
+                </button>
+                <button class="btn-next" onclick="nextStep(2)" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                    Continuar
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 3: Método de pago -->
+        <div id="step-3" class="checkout-step" style="display:none;">
+            <h3 class="step-title">Método de Pago</h3>
+            <div id="payment-methods">
+                <div class="pay-option" id="pay-paypal" onclick="selectPay('paypal')">
+                    <div class="pay-radio"></div>
+                    <div class="pay-icon" style="background:#0070ba;color:#fff;border-radius:8px;padding:4px 10px;font-size:0.72rem;font-weight:900;letter-spacing:0.05em;">PayPal</div>
+                    <div class="pay-info"><strong>PayPal</strong><span>Paga con tu cuenta PayPal de forma segura</span></div>
+                </div>
+                <div class="pay-option" id="pay-yape" onclick="selectPay('yape')">
+                    <div class="pay-radio"></div>
+                    <div class="pay-icon" style="background:#6b21a8;color:#fff;border-radius:8px;padding:4px 8px;font-size:0.75rem;font-weight:800;">YAPE</div>
+                    <div class="pay-info"><strong>Yape</strong><span>Escanea el QR y paga al instante</span></div>
+                </div>
+                <div class="pay-option" id="pay-bbva" onclick="selectPay('bbva')">
+                    <div class="pay-radio"></div>
+                    <div class="pay-icon" style="background:#004a97;color:#fff;border-radius:8px;padding:4px 8px;font-size:0.75rem;font-weight:800;">BBVA</div>
+                    <div class="pay-info"><strong>BBVA</strong><span>Transferencia o depósito bancario</span></div>
+                </div>
+                <div class="pay-option" id="pay-visa" onclick="selectPay('visa')">
+                    <div class="pay-radio"></div>
+                    <div class="pay-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+                    </div>
+                    <div class="pay-info"><strong>Visa / Mastercard</strong><span>Tarjeta de crédito o débito</span></div>
+                </div>
+            </div>
+
+            <!-- Visa form -->
+            <div id="visa-form" style="display:none;margin-top:1.5rem;">
+                <div class="form-group full-width"><label>Número de Tarjeta *</label><input type="text" id="inp-card-num" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Vencimiento *</label><input type="text" id="inp-card-exp" placeholder="MM/AA" maxlength="5"></div>
+                    <div class="form-group"><label>CVV *</label><input type="text" id="inp-card-cvv" placeholder="123" maxlength="4"></div>
+                </div>
+                <div class="form-group full-width"><label>Nombre en la tarjeta *</label><input type="text" id="inp-card-name" placeholder="JUAN C GARCIA"></div>
+            </div>
+            <div id="yape-info" style="display:none;margin-top:1.5rem;text-align:center;">
+                <div style="background:#6b21a8;color:#fff;padding:1.5rem;border-radius:8px;">
+                    <div style="display:flex;justify-content:center;margin-bottom:0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                    </div>
+                    <p style="font-weight:700;margin:0.5rem 0;">Escanea con Yape</p>
+                    <p style="font-size:0.85rem;opacity:0.8;">Al confirmar la orden recibirás el QR de pago en tu correo</p>
+                </div>
+            </div>
+            <!-- BBVA info -->
+            <div id="bbva-info" style="display:none;margin-top:1.5rem;">
+                <div style="background:#004a97;color:#fff;padding:1.5rem;border-radius:8px;">
+                    <p style="font-weight:700;">Cuenta BBVA</p>
+                    <p style="font-size:1.2rem;letter-spacing:0.1em;margin:0.5rem 0;">0011-0175-01-12345678</p>
+                    <p style="font-size:0.8rem;opacity:0.8;">CCI: 011-175-000123456789-00</p>
+                </div>
+            </div>
+            <!-- PayPal info -->
+            <div id="paypal-info" style="display:none;margin-top:1.5rem;text-align:center;">
+                <div style="background:#0070ba;color:#fff;padding:1.5rem;border-radius:8px;">
+                    <div style="display:flex;justify-content:center;margin-bottom:0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9a5 5 0 0 1 5 5v1a5 5 0 0 1-5 5H7l-1 6H4L2 6a2 2 0 0 1 2-2h2z"/><path d="M10 13l-1 7"/></svg>
+                    </div>
+                    <p style="font-weight:700;margin:0.5rem 0;">Redirigir a PayPal</p>
+                    <p style="font-size:0.85rem;opacity:0.8;">Al confirmar serás redirigido a PayPal para completar el pago</p>
+                </div>
+            </div>
+
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                <button class="btn-back" onclick="prevStep(3)" style="display:flex;align-items:center;gap:6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                    Atrás
+                </button>
+                <button class="btn-next" onclick="nextStep(3)" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                    Continuar
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 4: Confirmación -->
+        <div id="step-4" class="checkout-step" style="display:none;">
+            <h3 class="step-title">Confirmar Pedido</h3>
+            <div id="order-summary"></div>
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                <button class="btn-back" onclick="prevStep(4)" style="display:flex;align-items:center;gap:6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                    Atrás
+                </button>
+                <button id="btn-place-order" class="btn-next" onclick="placeOrder()" style="background:#22c55e;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    Confirmar y Pagar
+                </button>
+            </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div id="step-success" class="checkout-step" style="display:none;text-align:center;padding:3rem 1rem;">
+            <div style="display:flex;justify-content:center;margin-bottom:1.5rem;">
+                <div style="width:80px;height:80px;background:#052e16;border:1px solid #22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
+            </div>
+            <h3 style="font-family:'Archivo',sans-serif;font-size:1.8rem;margin-bottom:0.8rem;">¡Pedido Confirmado!</h3>
+            <p style="color:var(--text-muted);margin-bottom:0.5rem;">Recibirás la confirmación en tu correo.</p>
+            <p id="order-number" style="color:#22c55e;font-weight:700;font-size:1.1rem;margin-bottom:2rem;"></p>
+            <button class="btn-next" onclick="closeCheckout();resetCart();" style="width:auto;padding:0.8rem 2.5rem;display:inline-flex;align-items:center;gap:8px;">
+                Seguir Comprando
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <style>
+        /* ── CART DRAWER ── */
+        #cart-drawer {
+            position: fixed;
+            top: 0; right: 0;
+            width: 400px;
+            max-width: 95vw;
+            height: 100vh;
+            background: #0a0a0a;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            z-index: 9001;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(110%);
+            transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+        }
+        #cart-drawer.open { transform: translateX(0); }
+        #cart-drawer-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.4rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: #000;
+        }
+        #cart-drawer-title { font-family:'Archivo',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:0.06em; }
+        #cart-close-btn { background:none; border:none; color:#888; font-size:1.2rem; cursor:pointer; padding:4px 8px; transition:color 0.2s; }
+        #cart-close-btn:hover { color:#fff; }
+        #cart-items-list { flex:1; overflow-y:auto; padding:1rem 1.5rem; display:flex; flex-direction:column; gap:0.8rem; }
+        .cart-item {
+            display:flex; gap:1rem; align-items:center;
+            background:#111; border:1px solid rgba(255,255,255,0.07);
+            padding:0.9rem 1rem; border-radius:4px;
+        }
+        .cart-item-icon { font-size:1.8rem; flex-shrink:0; }
+        .cart-item-info { flex:1; }
+        .cart-item-name { font-weight:600; font-size:0.9rem; margin-bottom:0.3rem; }
+        .cart-item-price { color:#888; font-size:0.85rem; }
+        .cart-item-qty {
+            display:flex; align-items:center; gap:6px;
+        }
+        .qty-btn {
+            width:24px; height:24px; background:#222; border:1px solid rgba(255,255,255,0.15);
+            color:#fff; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
+            border-radius:3px; transition:background 0.15s;
+        }
+        .qty-btn:hover { background:#333; }
+        .qty-num { font-weight:700; font-size:0.9rem; min-width:20px; text-align:center; }
+        .cart-item-remove { background:none; border:none; color:#555; cursor:pointer; font-size:1rem; padding:4px; transition:color 0.2s; }
+        .cart-item-remove:hover { color:#ff4444; }
+        .cart-empty-msg { text-align:center; color:#555; padding:3rem 1rem; }
+        .cart-empty-msg svg { margin-bottom:1rem; opacity:0.3; }
+        #cart-footer {
+            border-top:1px solid rgba(255,255,255,0.08);
+            padding:1.2rem 1.5rem;
+            background:#000;
+        }
+        #cart-subtotal-row {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:1rem;
+            font-size:1rem; font-weight:600;
+        }
+        #cart-subtotal { font-family:'Archivo',sans-serif; font-size:1.3rem; font-weight:900; }
+        #btn-checkout {
+            width:100%; padding:1rem;
+            background:#fff; color:#000;
+            border:none; cursor:pointer;
+            font-family:'Archivo',sans-serif; font-weight:800;
+            font-size:0.95rem; letter-spacing:0.06em; text-transform:uppercase;
+            transition:background 0.2s;
+        }
+        #btn-checkout:hover { background:#e0e0e0; }
+
+        /* badge */
+        #cart-badge { display:none; }
+        #cart-badge.visible { display:flex !important; }
+
+        /* ── CHECKOUT MODAL ── */
+        #checkout-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 620px;
+            max-width: 95vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            z-index: 9501;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+        }
+        #checkout-modal.open {
+            opacity: 1; pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        #checkout-header {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:1.2rem 1.5rem;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+            background:#000;
+            position:sticky; top:0; z-index:10;
+        }
+        #checkout-back { background:none; border:none; color:#888; cursor:pointer; font-size:0.9rem; padding:4px 8px; transition:color 0.2s; }
+        #checkout-back:hover { color:#fff; }
+        #checkout-title { font-family:'Archivo',sans-serif; font-weight:800; font-size:1rem; letter-spacing:0.06em; text-transform:uppercase; }
+
+        #steps-bar {
+            display:flex; align-items:center; justify-content:center;
+            padding:1.2rem 1.5rem;
+            border-bottom:1px solid rgba(255,255,255,0.06);
+            gap:0;
+        }
+        .step-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:default; }
+        .step-num {
+            width:28px; height:28px; border-radius:50%;
+            background:#222; border:1px solid rgba(255,255,255,0.15);
+            color:#666; font-size:0.75rem; font-weight:700;
+            display:flex; align-items:center; justify-content:center;
+            transition:all 0.3s;
+        }
+        .step-label { font-size:0.68rem; color:#555; letter-spacing:0.05em; font-weight:500; }
+        .step-line { width:40px; height:1px; background:rgba(255,255,255,0.1); margin-bottom:20px; }
+        .step-item.active .step-num { background:#fff; color:#000; border-color:#fff; }
+        .step-item.active .step-label { color:#fff; }
+        .step-item.done .step-num { background:#22c55e; color:#fff; border-color:#22c55e; }
+        .step-item.done .step-label { color:#22c55e; }
+
+        .checkout-step { padding:1.5rem; }
+        .step-title { font-family:'Archivo',sans-serif; font-size:1.1rem; font-weight:800; margin-bottom:1.5rem; letter-spacing:0.02em; }
+
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+        .form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:0; }
+        .form-group.full-width { grid-column:1/-1; margin-bottom:1rem; }
+        .form-group label { font-size:0.78rem; font-weight:600; color:#888; letter-spacing:0.06em; text-transform:uppercase; }
+        .form-group input, .form-group select {
+            background:#111; border:1px solid rgba(255,255,255,0.12);
+            color:#fff; padding:0.75rem 1rem;
+            font-family:'DM Sans',sans-serif; font-size:0.9rem;
+            border-radius:3px; outline:none;
+            transition:border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus { border-color:rgba(255,255,255,0.4); }
+        .form-group input::placeholder { color:#444; }
+        .form-group select { cursor:pointer; }
+        .form-group select option { background:#111; }
+
+        .btn-next {
+            width:100%; padding:0.9rem;
+            background:#fff; color:#000;
+            border:none; cursor:pointer;
+            font-family:'Archivo',sans-serif; font-weight:800;
+            font-size:0.9rem; letter-spacing:0.06em; text-transform:uppercase;
+            border-radius:3px; transition:background 0.2s;
+        }
+        .btn-next:hover { background:#e0e0e0; }
+        .btn-back {
+            padding:0.9rem 1.5rem;
+            background:transparent; color:#888;
+            border:1px solid rgba(255,255,255,0.15); cursor:pointer;
+            font-family:'DM Sans',sans-serif; font-weight:600;
+            font-size:0.9rem; border-radius:3px; transition:all 0.2s;
+        }
+        .btn-back:hover { color:#fff; border-color:rgba(255,255,255,0.4); }
+
+        .delivery-info-box {
+            background:#111; border:1px solid rgba(255,255,255,0.07);
+            padding:0.8rem 1rem; border-radius:3px;
+            font-size:0.82rem; color:#888;
+            display:flex; align-items:center; gap:8px; margin-top:0.5rem;
+        }
+
+        /* Payment options */
+        #payment-methods { display:flex; flex-direction:column; gap:0.7rem; }
+        .pay-option {
+            display:flex; align-items:center; gap:1rem;
+            background:#111; border:1px solid rgba(255,255,255,0.1);
+            padding:1rem 1.2rem; border-radius:4px; cursor:pointer;
+            transition:all 0.2s;
+        }
+        .pay-option:hover { border-color:rgba(255,255,255,0.3); }
+        .pay-option.selected { border-color:#fff; background:#161616; }
+        .pay-radio {
+            width:16px; height:16px; border-radius:50%;
+            border:2px solid #555; flex-shrink:0;
+            transition:all 0.2s;
+        }
+        .pay-option.selected .pay-radio { border-color:#fff; background:#fff; box-shadow:inset 0 0 0 3px #111; }
+        .pay-icon { font-size:1.4rem; flex-shrink:0; }
+        .pay-info { display:flex; flex-direction:column; gap:2px; }
+        .pay-info strong { font-size:0.9rem; font-weight:700; }
+        .pay-info span { font-size:0.78rem; color:#666; }
+
+        /* Order summary */
+        #order-summary { background:#111; border:1px solid rgba(255,255,255,0.08); border-radius:4px; overflow:hidden; }
+        .summary-section { padding:1rem 1.2rem; border-bottom:1px solid rgba(255,255,255,0.06); }
+        .summary-section:last-child { border-bottom:none; }
+        .summary-label { font-size:0.72rem; font-weight:700; color:#666; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.6rem; }
+        .summary-item { display:flex; justify-content:space-between; font-size:0.88rem; padding:0.2rem 0; }
+        .summary-total { font-family:'Archivo',sans-serif; font-size:1.2rem; font-weight:900; color:#fff; }
+
+        /* Add to cart animation */
+        @keyframes cartBounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
+        .bounce { animation: cartBounce 0.3s ease; }
+
+        @media(max-width:520px) {
+            #checkout-modal { max-height:100vh; border-radius:0; }
+            .form-row { grid-template-columns:1fr; }
+        }
+    </style>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .product-card, .section-title').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // ── CART LOGIC ──
+        let cart = [];
+        let selectedPay = '';
+        let currentStep = 1;
+
+        function addToCart(name, price, id) {
+            const existing = cart.find(i => i.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id, name, price, qty: 1 });
+            }
+            updateCartBadge();
+            animateBadge();
+            renderCartItems();
+        }
+
+        function updateCartBadge() {
+            const total = cart.reduce((s, i) => s + i.qty, 0);
+            const badge = document.getElementById('cart-badge');
+            badge.textContent = total;
+            if (total > 0) {
+                badge.classList.add('visible');
+            } else {
+                badge.classList.remove('visible');
+            }
+            // Update subtotal
+            const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            document.getElementById('cart-subtotal').textContent = 'S/ ' + subtotal.toLocaleString('es-PE');
+        }
+
+        function animateBadge() {
+            const badge = document.getElementById('cart-badge');
+            badge.classList.remove('bounce');
+            void badge.offsetWidth;
+            badge.classList.add('bounce');
+        }
+
+        function renderCartItems() {
+            const list = document.getElementById('cart-items-list');
+            if (cart.length === 0) {
+                list.innerHTML = '<div class="cart-empty-msg"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><p>Tu carrito está vacío</p></div>';
+                return;
+            }
+            list.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
+                    </div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">S/ ${item.price.toLocaleString('es-PE')} c/u</div>
+                    </div>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
+                        <span class="qty-num">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeItem('${item.id}')" title="Eliminar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function openCart() {
+            if (cart.length === 0) renderCartItems();
+            document.getElementById('cart-overlay').style.display = 'block';
+            document.getElementById('cart-drawer').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-overlay').style.display = 'none';
+            document.getElementById('cart-drawer').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function goCheckout() {
+            if (cart.length === 0) return;
+            closeCart();
+            currentStep = 1;
+            showStep(1);
+            document.getElementById('checkout-overlay').style.display = 'block';
+            document.getElementById('checkout-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-overlay').style.display = 'none';
+            document.getElementById('checkout-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function showStep(n) {
+            [1,2,3,4,'success'].forEach(s => {
+                const el = document.getElementById('step-' + s);
+                if (el) el.style.display = 'none';
+            });
+            const target = document.getElementById('step-' + n);
+            if (target) target.style.display = 'block';
+
+            // Update step indicators
+            for (let i = 1; i <= 4; i++) {
+                const ind = document.getElementById('step-ind-' + i);
+                if (!ind) continue;
+                ind.classList.remove('active','done');
+                if (i < n) ind.classList.add('done');
+                else if (i === n) ind.classList.add('active');
+            }
+            // Scroll modal to top
+            document.getElementById('checkout-modal').scrollTop = 0;
+        }
+
+        function nextStep(from) {
+            if (from === 1) {
+                const nombres = document.getElementById('inp-nombres').value.trim();
+                const apellidos = document.getElementById('inp-apellidos').value.trim();
+                const dni = document.getElementById('inp-dni').value.trim();
+                const tel = document.getElementById('inp-telefono').value.trim();
+                const email = document.getElementById('inp-email').value.trim();
+                if (!nombres || !apellidos || !dni || !tel || !email) {
+                    alert('Por favor completa todos los campos obligatorios.'); return;
+                }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    alert('Ingresa un correo válido.'); return;
+                }
+            }
+            if (from === 2) {
+                const dpto = document.getElementById('inp-dpto').value;
+                const prov = document.getElementById('inp-provincia').value.trim();
+                const dist = document.getElementById('inp-distrito').value.trim();
+                const dir = document.getElementById('inp-direccion').value.trim();
+                if (!dpto || !prov || !dist || !dir) {
+                    alert('Por favor completa todos los campos obligatorios.'); return;
+                }
+            }
+            if (from === 3) {
+                if (!selectedPay) { alert('Selecciona un método de pago.'); return; }
+                if (selectedPay === 'visa') {
+                    const num = document.getElementById('inp-card-num').value.trim();
+                    const exp = document.getElementById('inp-card-exp').value.trim();
+                    const cvv = document.getElementById('inp-card-cvv').value.trim();
+                    const cname = document.getElementById('inp-card-name').value.trim();
+                    if (!num || !exp || !cvv || !cname) { alert('Completa los datos de la tarjeta.'); return; }
+                }
+                buildSummary();
+            }
+            currentStep = from + 1;
+            showStep(currentStep);
+        }
+
+        function prevStep(from) {
+            currentStep = from - 1;
+            showStep(currentStep);
+        }
+
+        function selectPay(method) {
+            selectedPay = method;
+            document.querySelectorAll('.pay-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('pay-' + method).classList.add('selected');
+            // Show/hide sub-forms
+            ['visa-form','yape-info','bbva-info','paypal-info'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            const map = { visa:'visa-form', yape:'yape-info', bbva:'bbva-info', paypal:'paypal-info' };
+            if (map[method]) document.getElementById(map[method]).style.display = 'block';
+        }
+
+        function buildSummary() {
+            const nombres = document.getElementById('inp-nombres').value.trim();
+            const apellidos = document.getElementById('inp-apellidos').value.trim();
+            const email = document.getElementById('inp-email').value.trim();
+            const tel = document.getElementById('inp-telefono').value.trim();
+            const dni = document.getElementById('inp-dni').value.trim();
+            const dpto = document.getElementById('inp-dpto').value;
+            const prov = document.getElementById('inp-provincia').value.trim();
+            const dist = document.getElementById('inp-distrito').value.trim();
+            const dir = document.getElementById('inp-direccion').value.trim();
+            const ref = document.getElementById('inp-referencia').value.trim();
+
+            const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            const envio = subtotal >= 500 ? 'Gratis' : 'S/ 15';
+            const total = subtotal + (subtotal >= 500 ? 0 : 15);
+
+            const payNames = { paypal:'PayPal', yape:'Yape', bbva:'BBVA Transferencia', visa:'Visa / Mastercard' };
+
+            const itemsHTML = cart.map(i =>
+                `<div class="summary-item"><span>${i.name} x${i.qty}</span><span>S/ ${(i.price*i.qty).toLocaleString('es-PE')}</span></div>`
+            ).join('');
+
+            document.getElementById('order-summary').innerHTML = `
+                <div class="summary-section">
+                    <div class="summary-label">Productos</div>
+                    ${itemsHTML}
+                </div>
+                <div class="summary-section">
+                    <div class="summary-label">Comprador</div>
+                    <div class="summary-item"><span>Nombre</span><span>${nombres} ${apellidos}</span></div>
+                    <div class="summary-item"><span>DNI</span><span>${dni}</span></div>
+                    <div class="summary-item"><span>Teléfono</span><span>${tel}</span></div>
+                    <div class="summary-item"><span>Email</span><span>${email}</span></div>
+                </div>
+                <div class="summary-section">
+                    <div class="summary-label">Dirección de Entrega</div>
+                    <div class="summary-item"><span>${dir}${ref ? ', '+ref : ''}</span><span></span></div>
+                    <div class="summary-item"><span>${dist}, ${prov} – ${dpto}</span><span></span></div>
+                </div>
+                <div class="summary-section">
+                    <div class="summary-label">Pago y Costos</div>
+                    <div class="summary-item"><span>Método</span><span>${payNames[selectedPay]}</span></div>
+                    <div class="summary-item"><span>Subtotal</span><span>S/ ${subtotal.toLocaleString('es-PE')}</span></div>
+                    <div class="summary-item"><span>Envío</span><span>${envio}</span></div>
+                    <div class="summary-item summary-total"><span>TOTAL</span><span>S/ ${total.toLocaleString('es-PE')}</span></div>
+                </div>
+            `;
+        }
+
+        function placeOrder() {
+            const orderNum = 'PC-' + Date.now().toString().slice(-7);
+            document.getElementById('order-number').textContent = 'N° de orden: ' + orderNum;
+            showStep('success');
+            // Hide steps bar
+            document.getElementById('steps-bar').style.display = 'none';
+            document.getElementById('checkout-back').style.display = 'none';
+        }
+
+        function resetCart() {
+            cart = [];
+            selectedPay = '';
+            currentStep = 1;
+            updateCartBadge();
+            renderCartItems();
+            document.getElementById('steps-bar').style.display = 'flex';
+            document.getElementById('checkout-back').style.display = 'block';
+        }
+
+        // Format card number with spaces
+        document.addEventListener('input', function(e) {
+            if (e.target.id === 'inp-card-num') {
+                let v = e.target.value.replace(/\D/g,'').slice(0,16);
+                e.target.value = v.replace(/(.{4})/g,'$1 ').trim();
+            }
+            if (e.target.id === 'inp-card-exp') {
+                let v = e.target.value.replace(/\D/g,'').slice(0,4);
+                if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+                e.target.value = v;
+            }
+        });
+    </script>
+    <script type="module" src="./headBot.js"></script>
+</body>
+</html>
