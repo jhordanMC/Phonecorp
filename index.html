@@ -164,80 +164,39 @@
     <section class="products" id="productos">
         <div class="section-title">
             <h2>Smartphones <span class="gradient-text">Destacados</span></h2>
-            <p>Los modelos más populares y tecnología de punta</p>
+            <p>Top 8 Samsung disponibles — busca por marca o modelo</p>
         </div>
-        <div class="products-slider">
-            <div class="product-card">
-                <div class="product-image">
-                    <div class="product-badge">Nuevo</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
-                </div>
-                <div class="product-info">
-                    <h3>iPhone 15 Pro Max</h3>
-                    <div class="product-specs">
-                        <span class="spec-tag">256GB</span>
-                        <span class="spec-tag">6.7"</span>
-                        <span class="spec-tag">5G</span>
-                    </div>
-                    <div class="product-price">S/ 5,499</div>
-                    <div class="product-actions">
-                        <button class="btn-cart" onclick="addToCart('iPhone 15 Pro Max', 5499, 'iphone15promax')">Agregar al Carrito</button>
-                    </div>
-                </div>
+
+        <!-- Buscador de productos -->
+        <div class="products-search-bar">
+            <div class="search-input-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input
+                    type="text"
+                    id="product-search-input"
+                    placeholder="Buscar por marca o modelo... ej: samsung, redmi note"
+                    autocomplete="off"
+                />
+                <button id="clear-search-btn" onclick="clearSearch()" style="display:none;" title="Limpiar búsqueda">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
             </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <div class="product-badge">Popular</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
-                </div>
-                <div class="product-info">
-                    <h3>Samsung Galaxy S24 Ultra</h3>
-                    <div class="product-specs">
-                        <span class="spec-tag">512GB</span>
-                        <span class="spec-tag">6.8"</span>
-                        <span class="spec-tag">5G</span>
-                    </div>
-                    <div class="product-price">S/ 4,999</div>
-                    <div class="product-actions">
-                        <button class="btn-cart" onclick="addToCart('Samsung Galaxy S24 Ultra', 4999, 'samsungs24ultra')">Agregar al Carrito</button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
-                </div>
-                <div class="product-info">
-                    <h3>Google Pixel 8 Pro</h3>
-                    <div class="product-specs">
-                        <span class="spec-tag">256GB</span>
-                        <span class="spec-tag">6.7"</span>
-                        <span class="spec-tag">5G</span>
-                    </div>
-                    <div class="product-price">S/ 3,799</div>
-                    <div class="product-actions">
-                        <button class="btn-cart" onclick="addToCart('Google Pixel 8 Pro', 3799, 'pixel8pro')">Agregar al Carrito</button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <div class="product-badge">Oferta</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>
-                </div>
-                <div class="product-info">
-                    <h3>Xiaomi 14 Ultra</h3>
-                    <div class="product-specs">
-                        <span class="spec-tag">512GB</span>
-                        <span class="spec-tag">6.73"</span>
-                        <span class="spec-tag">5G</span>
-                    </div>
-                    <div class="product-price">S/ 3,499</div>
-                    <div class="product-actions">
-                        <button class="btn-cart" onclick="addToCart('Xiaomi 14 Ultra', 3499, 'xiaomi14ultra')">Agregar al Carrito</button>
-                    </div>
-                </div>
-            </div>
+            <div id="search-results-info" style="display:none;"></div>
+        </div>
+
+        <!-- Contenedor dinámico de productos -->
+        <div class="products-slider" id="products-container">
+            <!-- Skeleton loaders mientras carga la API -->
+            <div class="product-card skeleton-card"><div class="skeleton sk-img"></div><div class="skeleton sk-title"></div><div class="skeleton sk-specs"></div><div class="skeleton sk-price"></div></div>
+            <div class="product-card skeleton-card"><div class="skeleton sk-img"></div><div class="skeleton sk-title"></div><div class="skeleton sk-specs"></div><div class="skeleton sk-price"></div></div>
+            <div class="product-card skeleton-card"><div class="skeleton sk-img"></div><div class="skeleton sk-title"></div><div class="skeleton sk-specs"></div><div class="skeleton sk-price"></div></div>
+            <div class="product-card skeleton-card"><div class="skeleton sk-img"></div><div class="skeleton sk-title"></div><div class="skeleton sk-specs"></div><div class="skeleton sk-price"></div></div>
+        </div>
+
+        <!-- Mensaje de error API -->
+        <div id="api-error-msg" style="display:none;" class="api-error-banner">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            <span>No se pudo conectar con el servidor. Asegúrate de que el backend Flask esté corriendo en <code>https://JhordanMC-ProyectoPhonecorp.hf.space</code>.</span>
         </div>
     </section>
 
@@ -256,7 +215,7 @@
                 <p>Líder en comercialización digital de smartphones de última generación en Perú.</p>
                 <p><span style="display:inline-flex;vertical-align:middle;margin-right:6px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span> Av. Innovación Tecnológica N.º 123<br>San Isidro, Lima – Perú</p>
                 <p><span style="display:inline-flex;vertical-align:middle;margin-right:6px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> (01) 999-1919</p>
-                <p><span style="display:inline-flex;vertical-align:middle;margin-right:6px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4131292e2f24222e33310131292e2f24222e33312c20282d6f3124">[email&#160;protected]</a></p>
+                <p><span style="display:inline-flex;vertical-align:middle;margin-right:6px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span> <a href="mailto:jhordanmedinac@gmail.com">jhordanmedinac@gmail.com</a></p>
             </div>
             <div class="footer-section">
                 <h4>Productos</h4>
@@ -855,6 +814,200 @@
         });
 
         // Badge móvil sincronizado dentro de updateCartBadge()
+
+        // ── PRODUCTOS DINÁMICOS DESDE API ──
+        const API_BASE = 'https://JhordanMC-ProyectoPhonecorp.hf.space';
+        let searchTimeout = null;
+
+        // Iconos SVG del teléfono (placeholder)
+        const phoneIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.25"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="17" r="1"/></svg>`;
+
+        function getBadge(equipo) {
+            const nombre = (equipo.nombre || '').toLowerCase();
+            const precio = equipo.precio_soles || 0;
+            if (precio < 600) return { label: 'Económico', color: '#22c55e' };
+            if (nombre.includes('pro') || nombre.includes('ultra')) return { label: 'Premium', color: '#a855f7' };
+            if (precio < 1200) return { label: 'Popular', color: '#3b82f6' };
+            return null;
+        }
+
+        function buildProductCard(equipo, index) {
+            const nombre = equipo.nombre
+                ? equipo.nombre
+                : `${(equipo.marca || '').replace(/\b\w/g, c => c.toUpperCase())} ${(equipo.modelo || '').replace(/\b\w/g, c => c.toUpperCase())}`;
+            const precio = equipo.precio_soles || 0;
+            const ram = equipo.ram_gb || 0;
+            const almacenamiento = equipo.almacenamiento_gb || 0;
+            const color = equipo.color || '';
+            const marca = equipo.marca || '';
+            const modelo = equipo.modelo || '';
+            const badge = getBadge({ nombre, precio_soles: precio });
+            const safeId = nombre.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const cardId = `card-img-${index}`;
+
+            return `
+            <div class="product-card">
+                <div class="product-image" id="${cardId}">
+                    ${badge ? `<div class="product-badge" style="background:${badge.color}">${badge.label}</div>` : ''}
+                    <div class="img-placeholder">
+                        <div class="img-spinner"></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>${nombre}</h3>
+                    <div class="product-specs">
+                        ${ram ? `<span class="spec-tag">${ram}GB RAM</span>` : ''}
+                        ${almacenamiento ? `<span class="spec-tag">${almacenamiento}GB</span>` : ''}
+                        ${color ? `<span class="spec-tag">${color}</span>` : ''}
+                    </div>
+                    <div class="product-price">S/ ${precio.toLocaleString('es-PE')}</div>
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="addToCart('${nombre.replace(/'/g, "\\'")}', ${precio}, '${safeId}')">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        async function loadImageForCard(marca, modelo, cardId) {
+            try {
+                const res = await fetch(`${API_BASE}/api/equipos/imagen?marca=${encodeURIComponent(marca)}&modelo=${encodeURIComponent(modelo)}`);
+                const data = await res.json();
+                const container = document.getElementById(cardId);
+                if (!container) return;
+                const placeholder = container.querySelector('.img-placeholder');
+                const badge = container.querySelector('.product-badge');
+
+                if (data.success && data.imagen) {
+                    const img = document.createElement('img');
+                    img.src = data.imagen;
+                    img.alt = `${marca} ${modelo}`;
+                    img.style.cssText = 'width:100%;height:100%;object-fit:contain;padding:1rem;border-radius:12px;';
+                    img.onerror = () => {
+                        if (placeholder) placeholder.innerHTML = phoneIconSVG;
+                    };
+                    if (placeholder) placeholder.replaceWith(img);
+                } else {
+                    if (placeholder) placeholder.innerHTML = phoneIconSVG;
+                }
+            } catch {
+                const container = document.getElementById(cardId);
+                if (container) {
+                    const placeholder = container.querySelector('.img-placeholder');
+                    if (placeholder) placeholder.innerHTML = phoneIconSVG;
+                }
+            }
+        }
+
+        function renderProducts(equipos) {
+            const container = document.getElementById('products-container');
+            if (!equipos || equipos.length === 0) {
+                container.innerHTML = `
+                <div style="grid-column:1/-1;text-align:center;padding:3rem;color:rgba(255,255,255,0.5);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;display:block;margin-inline:auto;opacity:0.3"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <p>No se encontraron equipos para tu búsqueda.</p>
+                </div>`;
+                return;
+            }
+            container.innerHTML = equipos.map((eq, i) => buildProductCard(eq, i)).join('');
+
+            // Cargar imágenes de forma SECUENCIAL — una a la vez para no saturar DuckDuckGo
+            const cola = equipos
+                .map((eq, i) => ({ marca: eq.marca || '', modelo: eq.modelo || '', id: `card-img-${i}` }))
+                .filter(e => e.marca && e.modelo);
+
+            async function procesarCola(index) {
+                if (index >= cola.length) return;
+                const { marca, modelo, id } = cola[index];
+                await loadImageForCard(marca, modelo, id);
+                // Pequeña pausa entre requests para no saturar
+                await new Promise(r => setTimeout(r, 800));
+                procesarCola(index + 1);
+            }
+
+            procesarCola(0);
+        }
+
+        async function loadAllProducts() {
+            try {
+                const res = await fetch(`${API_BASE}/api/equipos`);
+                if (!res.ok) throw new Error('Error API');
+                const data = await res.json();
+                if (data.success) {
+                    renderProducts(data.equipos);
+                    document.getElementById('api-error-msg').style.display = 'none';
+                }
+            } catch (err) {
+                console.warn('API no disponible:', err);
+                document.getElementById('api-error-msg').style.display = 'flex';
+                // Fallback: muestra productos de ejemplo
+                const fallback = [
+                    { nombre: 'iPhone 15 Pro Max', precio_soles: 5499, ram_gb: 8, almacenamiento_gb: 256, color: 'Titanio' },
+                    { nombre: 'Samsung Galaxy S24 Ultra', precio_soles: 4999, ram_gb: 12, almacenamiento_gb: 512, color: 'Negro' },
+                    { nombre: 'Google Pixel 8 Pro', precio_soles: 3799, ram_gb: 12, almacenamiento_gb: 256, color: 'Obsidiana' },
+                    { nombre: 'Xiaomi 14 Ultra', precio_soles: 3499, ram_gb: 16, almacenamiento_gb: 512, color: 'Blanco' }
+                ];
+                renderProducts(fallback);
+            }
+        }
+
+        async function searchProducts(query) {
+            const container = document.getElementById('products-container');
+            const info = document.getElementById('search-results-info');
+            const clearBtn = document.getElementById('clear-search-btn');
+
+            if (!query || query.length < 2) {
+                clearBtn.style.display = 'none';
+                info.style.display = 'none';
+                loadAllProducts();
+                return;
+            }
+
+            clearBtn.style.display = 'flex';
+
+            // Skeleton mientras busca
+            container.innerHTML = `
+                <div class="product-card skeleton-card"><div class="skeleton sk-img"></div><div class="skeleton sk-title"></div><div class="skeleton sk-specs"></div><div class="skeleton sk-price"></div></div>
+                <div class="product-card skeleton-card"><div class="skeleton sk-img"></div><div class="skeleton sk-title"></div><div class="skeleton sk-specs"></div><div class="skeleton sk-price"></div></div>
+                <div class="product-card skeleton-card"><div class="skeleton sk-img"></div><div class="skeleton sk-title"></div><div class="skeleton sk-specs"></div><div class="skeleton sk-price"></div></div>`;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/equipos/buscar?q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                if (data.success) {
+                    renderProducts(data.equipos);
+                    info.style.display = 'block';
+                    info.textContent = `${data.total} resultado${data.total !== 1 ? 's' : ''} para "${query}"`;
+                } else {
+                    renderProducts([]);
+                    info.style.display = 'block';
+                    info.textContent = data.error || 'Sin resultados';
+                }
+            } catch (err) {
+                container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:rgba(255,255,255,0.4);">Error al buscar. Revisa tu conexión con el servidor.</div>`;
+            }
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('product-search-input');
+            input.value = '';
+            document.getElementById('clear-search-btn').style.display = 'none';
+            document.getElementById('search-results-info').style.display = 'none';
+            loadAllProducts();
+            input.focus();
+        }
+
+        // Listener con debounce para el buscador
+        document.getElementById('product-search-input').addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            const q = this.value.trim();
+            document.getElementById('clear-search-btn').style.display = q.length ? 'flex' : 'none';
+            searchTimeout = setTimeout(() => searchProducts(q), 400);
+        });
+
+        // Cargar productos al iniciar
+        loadAllProducts();
 
         // Format card number with spaces
         document.addEventListener('input', function(e) {
