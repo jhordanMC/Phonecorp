@@ -33265,7 +33265,7 @@ document.body.appendChild(bot);
                 <div class="cgpvp-chat-header">
                     <img src="PhoneCorpLogo.png" alt="CGPVP" class="cgpvp-chat-header-avatar">
                     <div class="cgpvp-chat-header-info">
-                        <div class="cgpvp-chat-header-title">Asistente PhoneCorp</div>
+                        <div class="cgpvp-chat-header-title">Alba · PhoneCorp</div>
                         <div class="cgpvp-chat-header-status">En línea</div>
                     </div>
                     <button class="cgpvp-chat-close" id="cgpvpCloseChat">✕</button>
@@ -33274,11 +33274,31 @@ document.body.appendChild(bot);
                     <div class="cgpvp-message cgpvp-message-bot">
                         <img src="PhoneCorpLogo.png" alt="Bot" class="cgpvp-message-bot-avatar">
                         <div class="cgpvp-message-bot-content">
-                            <p>¡Hola! 👋 Soy tu asistente virtual. ¿En qué puedo orientarte hoy sobre nuestras operaciones o capacitaciones?</p>
+                            <p>¡Hola! Soy <strong>Alba</strong>, asistente virtual de PhoneCorp. ¿Qué deseas hacer?</p>
+                            <div id="cgpvpMenuOpciones" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+                                <button id="cgpvpBtnComparar" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:8px;padding:10px 14px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:left;">&#128202; Comparar equipos</button>
+                                <button id="cgpvpBtnChat" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:8px;padding:10px 14px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:left;">&#128172; Consultar con Alba</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="cgpvp-chat-input-area">
+                <div id="cgpvpComparador" style="display:none;padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);flex-direction:column;gap:8px;background:rgba(255,255,255,0.02);">
+                    <div style="display:flex;flex-direction:column;gap:4px;">
+                        <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;">Equipo 1</span>
+                        <input type="text" id="cgpvpMarca1" placeholder="Marca (ej: samsung)" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:7px;color:#fff;font-size:13px;padding:7px 10px;font-family:'DM Sans',sans-serif;outline:none;">
+                        <input type="text" id="cgpvpModelo1" placeholder="Modelo (ej: a54)" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:7px;color:#fff;font-size:13px;padding:7px 10px;font-family:'DM Sans',sans-serif;outline:none;">
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:4px;">
+                        <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;">Equipo 2</span>
+                        <input type="text" id="cgpvpMarca2" placeholder="Marca (ej: xiaomi)" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:7px;color:#fff;font-size:13px;padding:7px 10px;font-family:'DM Sans',sans-serif;outline:none;">
+                        <input type="text" id="cgpvpModelo2" placeholder="Modelo (ej: redmi note 12)" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:7px;color:#fff;font-size:13px;padding:7px 10px;font-family:'DM Sans',sans-serif;outline:none;">
+                    </div>
+                    <div style="display:flex;gap:8px;">
+                        <button id="cgpvpCompararBtn" style="flex:1;background:#fff;color:#000;border:none;border-radius:7px;padding:9px 0;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Comparar</button>
+                        <button id="cgpvpVolverBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);border-radius:7px;padding:9px 14px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">&#8592; Volver</button>
+                    </div>
+                </div>
+                <div class="cgpvp-chat-input-area" id="cgpvpInputArea" style="display:none;">
                     <input 
                         type="text" 
                         class="cgpvp-chat-input" 
@@ -33293,7 +33313,7 @@ document.body.appendChild(bot);
                     </button>
                 </div>
                 <div class="cgpvp-powered-by">
-                    Powered by <strong>Alba</strong>
+                    Powered by <strong>Alba · DeepSeek</strong>
                 </div>
             </div>
         </div>
@@ -33377,15 +33397,15 @@ document.body.appendChild(bot);
         // Respuestas predefinidas del bot
         const botResponses = {
             'hola': '¡Hola! Bienvenido al Cuerpo General de Paramédicos Voluntarios del Perú. ¿Cómo puedo ayudarte?',
-            'operaciones': 'Nuestras operaciones incluyen rescates, atención de emergencias médicas, y apoyo en desastres naturales. ¿Te gustaría más información sobre alguna operación específica?',
-            'capacitacion': 'Ofrecemos cursos de Primeros Auxilios, RCP, Atención Prehospitalaria y más. ¿Deseas información sobre inscripciones?',
-            'capacitación': 'Ofrecemos cursos de Primeros Auxilios, RCP, Atención Prehospitalaria y más. ¿Deseas información sobre inscripciones?',
-            'unirse': 'Para unirte al CGPVP necesitas: ser mayor de 18 años, aprobar el curso básico de paramédico y pasar la evaluación física. ¿Quieres más detalles?',
-            'contacto': 'Puedes contactarnos al teléfono (01) 234-5678 o escribirnos a info@cgpvp.org.pe',
-            'horarios': 'Estamos disponibles 24/7 para emergencias. Nuestras oficinas atienden de lunes a viernes de 8:00 AM a 6:00 PM.',
-            'voluntariado': 'El voluntariado es el corazón de nuestra institución. Realizamos campañas médicas en zonas rurales y atención en eventos masivos. ¿Te interesa participar?',
-            'emergencia': 'Para emergencias médicas, llama al 116 o al (01) 234-5678. Nuestras unidades están listas para responder.',
-            'default': 'Gracias por tu mensaje. Un asesor revisará tu consulta y te responderá pronto. ¿Hay algo más en lo que pueda ayudarte?'
+            'operaciones': 'En PhoneCorp ofrecemos Samsung, Xiaomi, iPhone y más. ¿Qué marca te interesa?',
+            'samsung': 'Samsung tiene excelentes opciones en todas las gamas. ¿Buscas algo económico o de alta gama?',
+            'xiaomi': 'Xiaomi destaca por gran rendimiento a precio accesible. ¿Qué modelo te interesa?',
+            'precio': 'Tenemos equipos desde S/ 400 hasta más de S/ 5,000. ¿Cuál es tu presupuesto?',
+            'contacto': 'Puedes escribirnos a jhordanmedinac@gmail.com o al (01) 999-1919.',
+            'garantia': 'Todos nuestros equipos cuentan con garantía oficial. Consulta los detalles según la marca.',
+            'envio': 'Hacemos envíos a todo el Perú. Envío gratis en compras mayores a S/ 500.',
+            'oferta': 'Tenemos ofertas y descuentos disponibles. ¿Deseas ver los modelos en promoción?',
+            'default': 'Soy Alba de PhoneCorp. Puedo ayudarte con equipos, precios, comparaciones y más. ¿Qué necesitas?'
         };
 
         // Abrir chat al hacer clic en el head-bot
@@ -33397,7 +33417,7 @@ document.body.appendChild(bot);
                 // Leer bienvenida solo la primera vez que se abre
                 if (!welcomeSpoken) {
                     welcomeSpoken = true;
-                    speakBot('¡Hola! Soy tu asistente virtual de PhoneCorp. ¿En qué puedo ayudarte hoy?');
+                    speakBot('¡Hola! Soy Alba, asistente de PhoneCorp.');
                 }
                 // Ocultar cabeza y círculo en desktop con zoom alto (175%+)
                 hideHeadBotOnZoom();
@@ -33553,6 +33573,89 @@ document.body.appendChild(bot);
         inputField.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
+            }
+        });
+
+        // ── BOTONES DEL MENU ──
+        var HF_BASE = 'https://JhordanMC-ProyectoPhonecorp.hf.space';
+        var btnComparar  = document.getElementById('cgpvpBtnComparar');
+        var btnChat      = document.getElementById('cgpvpBtnChat');
+        var comparador   = document.getElementById('cgpvpComparador');
+        var inputArea    = document.getElementById('cgpvpInputArea');
+        var menuOpciones = document.getElementById('cgpvpMenuOpciones');
+        var compararBtn  = document.getElementById('cgpvpCompararBtn');
+        var volverBtn    = document.getElementById('cgpvpVolverBtn');
+
+        function mostrarMenu() {
+            comparador.style.display  = 'none';
+            inputArea.style.display   = 'none';
+            menuOpciones.style.display = 'flex';
+        }
+
+        btnComparar.addEventListener('click', function() {
+            menuOpciones.style.display = 'none';
+            comparador.style.display   = 'flex';
+            inputArea.style.display    = 'none';
+            addMessage('¡Perfecto! Ingresa la marca y modelo de los dos equipos.', false);
+        });
+
+        btnChat.addEventListener('click', function() {
+            menuOpciones.style.display = 'none';
+            comparador.style.display   = 'none';
+            inputArea.style.display    = 'flex';
+            addMessage('¡Listo! Puedes preguntarme sobre precios, características o recomendaciones.', false);
+            inputField.focus();
+        });
+
+        volverBtn.addEventListener('click', function() {
+            mostrarMenu();
+            addMessage('¿Qué más deseas hacer?', false);
+        });
+
+        compararBtn.addEventListener('click', async function() {
+            var marca1  = document.getElementById('cgpvpMarca1').value.trim();
+            var modelo1 = document.getElementById('cgpvpModelo1').value.trim();
+            var marca2  = document.getElementById('cgpvpMarca2').value.trim();
+            var modelo2 = document.getElementById('cgpvpModelo2').value.trim();
+
+            if (!marca1 || !modelo1 || !marca2 || !modelo2) {
+                addMessage('Por favor completa todos los campos antes de comparar.', false);
+                return;
+            }
+
+            compararBtn.disabled = true;
+            compararBtn.textContent = 'Comparando...';
+            addMessage('Comparando ' + marca1 + ' ' + modelo1 + ' vs ' + marca2 + ' ' + modelo2 + '...', true);
+
+            try {
+                var res = await fetch(HF_BASE + '/api/comparar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        equipo1: { marca: marca1, modelo: modelo1 },
+                        equipo2: { marca: marca2, modelo: modelo2 }
+                    })
+                });
+                var data = await res.json();
+
+                if (data.success) {
+                    var e1  = data.resultado.equipo1;
+                    var e2  = data.resultado.equipo2;
+                    var rec = data.resultado.recomendaciones;
+                    var msg = '<strong>Comparativa:</strong><br>' +
+                        '<b>' + e1.nombre + '</b>: S/ ' + e1.precio.toLocaleString() + ' | ' + e1.ram + 'GB RAM | ' + e1.almacenamiento + 'GB<br>' +
+                        '<b>' + e2.nombre + '</b>: S/ ' + e2.precio.toLocaleString() + ' | ' + e2.ram + 'GB RAM | ' + e2.almacenamiento + 'GB<br><br>' +
+                        '<b>Ganador:</b> ' + rec.equilibrio.mensaje;
+                    addMessage(msg, false);
+                    speakBot(rec.equilibrio.mensaje);
+                } else {
+                    addMessage(data.error || 'No encontré esos equipos. Verifica marca y modelo.', false);
+                }
+            } catch(err) {
+                addMessage('No pude conectarme al servidor. Verifica que el backend esté activo.', false);
+            } finally {
+                compararBtn.disabled = false;
+                compararBtn.textContent = 'Comparar';
             }
         });
     }
