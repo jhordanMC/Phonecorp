@@ -1,26 +1,50 @@
-package domain;
+package com.phonecorp.domain;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
-public class EntidadDetalleOrden {
+/**
+ * ENTIDAD - DetalleOrden
+ *
+ * SOLID - SRP:
+ * Representa una línea de detalle de una Orden de Venta.
+ */
+@Entity
+@Table(
+    name = "DetalleOrden",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "UQ_Orden_Producto", columnNames = {"id_orden", "id_producto"})
+    }
+)
+public class DetalleOrden {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_detalle")
     private Integer idDetalle;
+
+    @Column(name = "id_orden", nullable = false)
     private Integer idOrden;
+
+    @Column(name = "id_producto", nullable = false)
     private Integer idProducto;
+
+    @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
+
+    /**
+     * DECIMAL(10,2) → BigDecimal
+     * Evita errores financieros (principio de precisión monetaria).
+     */
+    @Column(name = "precio_pactado", nullable = false, precision = 10, scale = 2)
     private BigDecimal precioPactado;
+
+    @Column(name = "subtotal", nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
 
-    public EntidadDetalleOrden() {}
+    public DetalleOrden() {}
 
-    public EntidadDetalleOrden(Integer idDetalle, Integer idOrden, Integer idProducto, Integer cantidad,
-                               BigDecimal precioPactado, BigDecimal subtotal) {
-        this.idDetalle = idDetalle;
-        this.idOrden = idOrden;
-        this.idProducto = idProducto;
-        this.cantidad = cantidad;
-        this.precioPactado = precioPactado;
-        this.subtotal = subtotal;
-    }
+    // Getters & Setters
 
     public Integer getIdDetalle() { return idDetalle; }
     public void setIdDetalle(Integer idDetalle) { this.idDetalle = idDetalle; }
