@@ -32396,7 +32396,7 @@ class HeadBot extends HTMLElement {
 
     const loader = new GLTFLoader();
     let head;
-    loader.load("./cabezareconstruida.glb", (gltf) => {
+    loader.load("frontend/cabezareconstruida.glb", (gltf) => {
       head = gltf.scene;
       head.scale.set(1.5, 1.5, 1.5);
       scene.add(head);
@@ -33263,7 +33263,7 @@ document.body.appendChild(bot);
         <div class="cgpvp-chatbot-container">
             <div class="cgpvp-chat-window" id="cgpvpChatWindow">
                 <div class="cgpvp-chat-header">
-                    <img src="PhoneCorpLogo.png" alt="CGPVP" class="cgpvp-chat-header-avatar">
+                    <img src="frontend/PhoneCorpLogo.png" alt="CGPVP" class="cgpvp-chat-header-avatar">
                     <div class="cgpvp-chat-header-info">
                         <div class="cgpvp-chat-header-title">Alba · PhoneCorp</div>
                         <div class="cgpvp-chat-header-status">En línea</div>
@@ -33272,7 +33272,7 @@ document.body.appendChild(bot);
                 </div>
                 <div class="cgpvp-chat-messages" id="cgpvpChatMessages">
                     <div class="cgpvp-message cgpvp-message-bot">
-                        <img src="PhoneCorpLogo.png" alt="Bot" class="cgpvp-message-bot-avatar">
+                        <img src="frontend/PhoneCorpLogo.png" alt="Bot" class="cgpvp-message-bot-avatar">
                         <div class="cgpvp-message-bot-content">
                             <p>¡Hola! Soy <strong>Alba</strong>, asistente virtual de PhoneCorp. ¿Qué deseas hacer?</p>
                             <div id="cgpvpMenuOpciones" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
@@ -33479,7 +33479,7 @@ document.body.appendChild(bot);
                 `;
             } else {
                 messageDiv.innerHTML = `
-                    <img src="PhoneCorpLogo.png" alt="Bot" class="cgpvp-message-bot-avatar">
+                    <img src="frontend/PhoneCorpLogo.png" alt="Bot" class="cgpvp-message-bot-avatar">
                     <div class="cgpvp-message-bot-content">
                         <p>${message}</p>
                     </div>
@@ -33498,7 +33498,7 @@ document.body.appendChild(bot);
             typingDiv.className = 'cgpvp-message cgpvp-message-bot';
             typingDiv.id = 'typingIndicator';
             typingDiv.innerHTML = `
-                <img src="PhoneCorpLogo.png" alt="Bot" class="cgpvp-message-bot-avatar">
+                <img src="frontend/PhoneCorpLogo.png" alt="Bot" class="cgpvp-message-bot-avatar">
                 <div class="cgpvp-typing-indicator show">
                     <div class="cgpvp-typing-dot"></div>
                     <div class="cgpvp-typing-dot"></div>
