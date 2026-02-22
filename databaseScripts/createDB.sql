@@ -1,8 +1,18 @@
+use master;
+GO
+IF EXISTS (SELECT name FROM sys.databases WHERE name = 'DB_PhoneCorp')
+BEGIN
+    ALTER DATABASE DB_PhoneCorp SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE DB_PhoneCorp;
+END
+GO
+
 -- Creación de la Base de Datos
 CREATE DATABASE DB_PhoneCorp;
 GO
 USE DB_PhoneCorp;
 GO
+SELECT * FROM sys.tables WHERE name = 'Inventario';
 
 -- 1. Tabla Cliente
 CREATE TABLE Cliente (
