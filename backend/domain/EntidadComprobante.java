@@ -1,28 +1,51 @@
-package domain;
+package com.phonecorp.domain;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-public class EntidadComprobante {
+/**
+ * ENTIDAD - Comprobante
+ *
+ * SOLID - SRP:
+ * Representa únicamente la estructura persistente de la tabla Comprobante.
+ */
+@Entity
+@Table(name = "Comprobante")
+public class Comprobante {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comprobante")
     private Integer idComprobante;
-    private Integer idPago; // UNIQUE (1 a 1 con Pago)
+
+    /**
+     * Relación 1:1 con Pago
+     * UNIQUE en BD.
+     *
+     * SOLID - OCP:
+     * Si cambia la relación futura, solo modificamos esta capa de mapeo.
+     */
+    @Column(name = "id_pago", nullable = false, unique = true)
+    private Integer idPago;
+
+    @Column(name = "tipo_comprobante", nullable = false, length = 20)
     private String tipoComprobante;
+
+    @Column(name = "serie", nullable = false, length = 10)
     private String serie;
+
+    @Column(name = "numero_correlativo", nullable = false, length = 20)
     private String numeroCorrelativo;
-    private String hashSunat; // nullable
-    private LocalDateTime fechaEmision; // default GETDATE()
 
-    public EntidadComprobante() {}
+    @Column(name = "hash_sunat", columnDefinition = "NVARCHAR(255)")
+    private String hashSunat;
 
-    public EntidadComprobante(Integer idComprobante, Integer idPago, String tipoComprobante, String serie,
-                              String numeroCorrelativo, String hashSunat, LocalDateTime fechaEmision) {
-        this.idComprobante = idComprobante;
-        this.idPago = idPago;
-        this.tipoComprobante = tipoComprobante;
-        this.serie = serie;
-        this.numeroCorrelativo = numeroCorrelativo;
-        this.hashSunat = hashSunat;
-        this.fechaEmision = fechaEmision;
-    }
+    @Column(name = "fecha_emision")
+    private LocalDateTime fechaEmision;
+
+    public Comprobante() {}
+
+    // Getters & Setters
 
     public Integer getIdComprobante() { return idComprobante; }
     public void setIdComprobante(Integer idComprobante) { this.idComprobante = idComprobante; }

@@ -1,30 +1,50 @@
-package domain;
+package com.phonecorp.domain;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-public class EntidadCliente {
+/**
+ * ENTIDAD - Cliente
+ *
+ * BCE → Representa la Entidad del dominio.
+ *
+ * SOLID - SRP (Responsabilidad Única):
+ * Esta clase solo modela la estructura de datos persistente.
+ * No contiene lógica de negocio ni validaciones complejas.
+ */
+@Entity
+@Table(name = "Cliente")
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // SQL Server IDENTITY(1,1)
+    @Column(name = "id_cliente")
     private Integer idCliente;
+
+    @Column(name = "dni_ce", nullable = false, unique = true, length = 20)
     private String dniCe;
+
+    @Column(name = "nombres_completos", nullable = false, columnDefinition = "NVARCHAR(150)")
     private String nombresCompletos;
+
+    @Column(name = "direccion", nullable = false, columnDefinition = "NVARCHAR(200)")
     private String direccion;
-    private String telefono; // nullable
-    private String email;    // nullable
-    private String historialCrediticio; // default NORMAL
-    private LocalDateTime fechaRegistro; // default GETDATE()
 
-    public EntidadCliente() {}
+    @Column(name = "telefono", length = 15)
+    private String telefono;
 
-    public EntidadCliente(Integer idCliente, String dniCe, String nombresCompletos, String direccion,
-                          String telefono, String email, String historialCrediticio, LocalDateTime fechaRegistro) {
-        this.idCliente = idCliente;
-        this.dniCe = dniCe;
-        this.nombresCompletos = nombresCompletos;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-        this.historialCrediticio = historialCrediticio;
-        this.fechaRegistro = fechaRegistro;
-    }
+    @Column(name = "email", length = 100)
+    private String email;
+
+    @Column(name = "historial_crediticio", length = 20)
+    private String historialCrediticio;
+
+    @Column(name = "fecha_registro")
+    private LocalDateTime fechaRegistro;
+
+    public Cliente() {}
+
+    // Getters & Setters (SRP: solo acceso al estado)
 
     public Integer getIdCliente() { return idCliente; }
     public void setIdCliente(Integer idCliente) { this.idCliente = idCliente; }
